@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Georgina Ice Admin</title>
+  <link rel="stylesheet" href="../assets/accreditation.css">
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <h1>Georgina Ice JR C Hockey Club</h1>
+      <p>Admin panel for issuing, suspending, revoking, and maintaining arena credentials.</p>
+      <nav class="nav">
+        <a href="../">Home</a>
+        <a class="active" href="./">Admin</a>
+        <a href="../guard/">Guard</a>
+        <a href="../manager/">Manager</a>
+        <a href="../media/">Media Requests</a>
+      </nav>
+    </section>
+    <div class="stack">
+      <section class="panel">
+        <h2>Admin Panel</h2>
+        <p class="sub">Create credentials, manage status, and keep your arena accreditation roster current.</p>
+        <div class="stats">
+          <div class="stat"><span>Total Credentials</span><strong id="statTotal">0</strong></div>
+          <div class="stat"><span>Active</span><strong id="statIssued">0</strong></div>
+          <div class="stat"><span>Suspended/Revoked</span><strong id="statInactive">0</strong></div>
+        </div>
+        <div class="field-grid">
+          <div><label for="name">Full Name</label><input id="name" type="text" placeholder="Jordan Smith"></div>
+          <div><label for="roleType">Credential Type</label><select id="roleType"><option>Arena Staff</option><option>Security</option><option>Media</option><option>Player</option><option>Team Staff</option></select></div>
+          <div><label for="roleTitle">Role / Title</label><input id="roleTitle" type="text" placeholder="Head Trainer"></div>
+          <div><label for="accessLevel">Access Level</label><input id="accessLevel" type="text" placeholder="Bench, Dressing Room, Media Box"></div>
+          <div><label for="photoUrl">Photo URL (optional)</label><input id="photoUrl" type="text" placeholder="https://..."></div>
+          <div><label for="expiry">Expiry Date</label><input id="expiry" type="date"></div>
+        </div>
+        <div style="margin-top:12px;">
+          <label for="notes">Notes</label>
+          <textarea id="notes" placeholder="Emergency notes, department, media assignment, jersey number, or special instructions."></textarea>
+        </div>
+        <label class="checkline">
+          <input id="escortAllowed" type="checkbox">
+          <span>Allow access with security escort when the credential does not cover a scanner zone.</span>
+        </label>
+        <div class="actions">
+          <button class="primary" id="issueBtn">Issue Credential</button>
+          <button class="secondary" id="seedBtn">Load Demo Data</button>
+          <button class="danger" id="clearBtn">Clear All</button>
+        </div>
+        <div class="card-list" id="credentialList"></div>
+      </section>
+
+      <section class="panel">
+        <h2>Media Request Queue</h2>
+        <p class="sub">Review per-game, half-season, and full-season photo/video requests and convert approved requests into credentials with assigned rink positions.</p>
+        <div class="stats">
+          <div class="stat"><span>Total Requests</span><strong id="adminRequestTotal">0</strong></div>
+          <div class="stat"><span>Pending</span><strong id="adminRequestPending">0</strong></div>
+          <div class="stat"><span>Approved / Rejected</span><strong id="adminRequestApproved">0</strong> / <strong id="adminRequestRejected">0</strong></div>
+        </div>
+        <div class="card-list" id="adminRequestList"></div>
+      </section>
+    </div>
+  </div>
+  <script src="../assets/accreditation.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Georgina Ice Media Requests</title>
+  <link rel="stylesheet" href="../assets/accreditation.css">
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <h1>Georgina Ice JR C Hockey Club</h1>
+      <p>Media credential request page for single-game, half-season, and full-season photo or video access, including assigned shooting positions on a traditional ice rink.</p>
+      <nav class="nav">
+        <a href="../">Home</a>
+        <a href="../admin/">Admin</a>
+        <a href="../guard/">Guard</a>
+        <a href="../manager/">Manager</a>
+        <a class="active" href="./">Media Requests</a>
+      </nav>
+    </section>
+
+    <div class="split">
+      <section class="panel">
+        <h2>Request Media Credentials</h2>
+        <p class="sub">Apply for photo or video access. Single-game requests require a date. Use the rink positions list to request approved shooting locations.</p>
+        <div class="stats">
+          <div class="stat"><span>Total Requests</span><strong id="requestTotal">0</strong></div>
+          <div class="stat"><span>Pending</span><strong id="requestPending">0</strong></div>
+          <div class="stat"><span>Approved</span><strong id="requestApproved">0</strong></div>
+        </div>
+        <div class="field-grid">
+          <div><label for="requestName">Full Name</label><input id="requestName" type="text" placeholder="Jamie Parker"></div>
+          <div><label for="requestOutlet">Outlet / Organization</label><input id="requestOutlet" type="text" placeholder="Local Sports Network"></div>
+          <div><label for="requestEmail">Email</label><input id="requestEmail" type="email" placeholder="jamie@example.com"></div>
+          <div><label for="requestPhone">Phone</label><input id="requestPhone" type="text" placeholder="905-555-0101"></div>
+          <div><label for="requestType">Credential Type</label><select id="requestType"></select></div>
+          <div><label for="requestGameDate">Game Date</label><input id="requestGameDate" type="date"></div>
+        </div>
+        <div style="margin-top:12px;">
+          <label for="requestPositions">Requested Traditional Ice Rink Positions</label>
+          <select id="requestPositions" class="wide-select" multiple></select>
+          <p class="hint">Hold `Command` on Mac or `Ctrl` on Windows to select multiple positions.</p>
+        </div>
+        <div style="margin-top:12px;">
+          <label for="requestNotes">Assignment Notes</label>
+          <textarea id="requestNotes" placeholder="Story angle, interview needs, team focus, or equipment notes."></textarea>
+        </div>
+        <div class="actions">
+          <button class="primary" id="submitRequestBtn">Submit Media Request</button>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>My Requests</h2>
+        <p class="sub">Requests submitted from this browser are listed here with current approval status.</p>
+        <div class="card-list" id="requestList"></div>
+      </section>
+    </div>
+  </div>
+  <script src="../assets/accreditation.js"></script>
+</body>
+</html>

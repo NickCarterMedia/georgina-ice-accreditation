@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Georgina Ice Manager Pass View</title>
+  <link rel="stylesheet" href="../assets/accreditation.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <h1>Georgina Ice JR C Hockey Club</h1>
+      <p>Manager and credential-holder view for selecting a pass and presenting its QR code.</p>
+      <nav class="nav">
+        <a href="../">Home</a>
+        <a href="../admin/">Admin</a>
+        <a href="../guard/">Guard</a>
+        <a class="active" href="./">Manager</a>
+        <a href="../media/">Media Requests</a>
+      </nav>
+    </section>
+    <section class="panel">
+      <h2>Manager / Credential View</h2>
+      <p class="sub">Display the issued pass for the selected person. This can be used on a phone or tablet at the arena.</p>
+      <div>
+        <label for="holderSelect">Select Credential</label>
+        <select id="holderSelect"></select>
+      </div>
+      <div id="holderView" style="margin-top:16px;"></div>
+    </section>
+  </div>
+  <script src="../assets/accreditation.js"></script>
+</body>
+</html>

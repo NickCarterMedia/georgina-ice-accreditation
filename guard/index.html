@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Georgina Ice Guard Scanner</title>
+  <link rel="stylesheet" href="../assets/accreditation.css">
+  <script src="../assets/jsqr.js"></script>
+</head>
+<body>
+  <div class="shell">
+    <section class="hero">
+      <h1>Georgina Ice JR C Hockey Club</h1>
+      <p>Guard scanner for checkpoint validation, escort checks, and QR-based entry control.</p>
+      <nav class="nav">
+        <a href="../">Home</a>
+        <a href="../admin/">Admin</a>
+        <a class="active" href="./">Guard</a>
+        <a href="../manager/">Manager</a>
+        <a href="../media/">Media Requests</a>
+      </nav>
+    </section>
+    <section class="panel">
+      <h2>Guard Scanner</h2>
+      <p class="sub">Scan the QR code at arena entry. Validation checks status, expiry, access zone, and escort rules.</p>
+      <div class="scanner-shell">
+        <video id="video" playsinline muted></video>
+        <div class="scan-frame"></div>
+      </div>
+      <canvas id="scanCanvas" class="hidden-canvas"></canvas>
+      <div class="scan-actions">
+        <button class="primary" id="startScanBtn">Start Camera Scan</button>
+        <button class="secondary" id="stopScanBtn">Stop Scan</button>
+      </div>
+      <div style="margin-top:14px;">
+        <label for="scannerPreset">Scanner Checkpoint</label>
+        <select id="scannerPreset"></select>
+      </div>
+      <div style="margin-top:12px;">
+        <label for="customScannerZone">Custom Zone Name</label>
+        <input id="customScannerZone" type="text" placeholder="Visitors Dressing Room">
+        <p class="fine" style="margin:8px 0 0;">Choose `Custom Zone` above to verify against a named checkpoint you enter here.</p>
+      </div>
+      <div style="margin-top:14px;">
+        <label for="manualScan">Manual QR Payload</label>
+        <textarea id="manualScan" placeholder='Paste a QR payload here if camera access is unavailable.'></textarea>
+        <div class="scan-actions">
+          <button class="secondary" id="manualVerifyBtn">Verify Payload</button>
+        </div>
+      </div>
+      <div class="result" id="scanResult">No credential scanned yet.</div>
+    </section>
+  </div>
+  <script src="../assets/accreditation.js"></script>
+</body>
+</html>
