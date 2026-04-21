@@ -12,44 +12,48 @@ permissions:
   pull-requests: write
 
 jobs:
-  dev-to-staging:
-    if: github.ref == 'refs/heads/dev'
+  promote:
     runs-on: ubuntu-latest
     steps:
-      - name: Create PR from dev to staging
-        uses: peter-evans/create-pull-request@v7
+      - name: Open promotion pull request
+        uses: actions/github-script@v7
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: automation/dev-to-staging
-          base: staging
-          title: 'Promote dev to staging'
-          body: |
-            Automated pull request created after a push to `dev`.
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const branch = context.ref.replace("refs/heads/", "");
+            const base = branch === "dev" ? "staging" : branch === "staging" ? "main" : null;
 
-            Source: `dev`
-            Target: `staging`
-          labels: |
-            automated
-            promotion
-          delete-branch: true
+            if (!base) {
+              core.info(`No promotion target configured for ${branch}`);
+              return;
+            }
 
-  staging-to-main:
-    if: github.ref == 'refs/heads/staging'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Create PR from staging to main
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          branch: automation/staging-to-main
-          base: main
-          title: 'Promote staging to main'
-          body: |
-            Automated pull request created after a push to `staging`.
+            const { owner, repo } = context.repo;
+            const head = `${owner}:${branch}`;
 
-            Source: `staging`
-            Target: `main`
-          labels: |
-            automated
-            promotion
-          delete-branch: true
+            const existing = await github.rest.pulls.list({
+              owner,
+              repo,
+              state: "open",
+              head,
+              base
+            });
+
+            if (existing.data.length > 0) {
+              core.info(`Open PR already exists for ${branch} -> ${base}`);
+              return;
+            }
+
+            await github.rest.pulls.create({
+              owner,
+              repo,
+              title: `Promote ${branch} to ${base}`,
+              head: branch,
+              base,
+              body: [
+                `Automated promotion pull request.`,
+                ``,
+                `Source: \`${branch}\``,
+                `Target: \`${base}\``
+              ].join("\n")
+            });
