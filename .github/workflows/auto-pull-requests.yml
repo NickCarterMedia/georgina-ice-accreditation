@@ -1,0 +1,55 @@
+name: Auto Pull Requests
+
+on:
+  push:
+    branches:
+      - dev
+      - staging
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  dev-to-staging:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create PR from dev to staging
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/dev-to-staging
+          base: staging
+          title: 'Promote dev to staging'
+          body: |
+            Automated pull request created after a push to `dev`.
+
+            Source: `dev`
+            Target: `staging`
+          labels: |
+            automated
+            promotion
+          delete-branch: true
+
+  staging-to-main:
+    if: github.ref == 'refs/heads/staging'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create PR from staging to main
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: automation/staging-to-main
+          base: main
+          title: 'Promote staging to main'
+          body: |
+            Automated pull request created after a push to `staging`.
+
+            Source: `staging`
+            Target: `main`
+          labels: |
+            automated
+            promotion
+          delete-branch: true
